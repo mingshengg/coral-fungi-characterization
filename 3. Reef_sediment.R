@@ -372,18 +372,22 @@ otu_new_hostzero <- ps_scatter_d %>% subset_samples(Method_overall == 'Zymo_Host
 
 compare_primer <- rbind(otu_old_powersoil, otu_new_powersoil) %>% t()
 ggplot(data = compare_primer, aes(x = Qiagen_PowerSoil_Old, y = Qiagen_PowerSoil_New)) +
-  geom_point()
+  geom_point() +
+  geom_abline(slope = 1)
 
 summary(lm(Qiagen_PowerSoil_Old ~ Qiagen_PowerSoil_New, data = data.frame(compare_primer)))
 
 compare_extraction <- rbind(otu_old_hostzero, otu_old_powersoil) %>% t()
 ggplot(data = compare_extraction, aes(x = Zymo_HostZero_Old , y = Qiagen_PowerSoil_Old)) +
-  geom_point()
+  geom_point() +
+  geom_abline(slope = 1)
 
 summary(lm(Zymo_HostZero_Old ~ Qiagen_PowerSoil_Old, data = data.frame(compare_extraction)))
 
 compare_both <- rbind(otu_new_hostzero, otu_old_powersoil) %>% t()
 ggplot(data = compare_both, aes(x = Zymo_HostZero_New , y = Qiagen_PowerSoil_Old)) +
-  geom_point()
+  geom_point() +
+  geom_abline(slope = 1)
 
 summary(lm(Zymo_HostZero_New ~ Qiagen_PowerSoil_Old, data = data.frame(compare_both)))
+
